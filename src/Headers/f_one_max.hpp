@@ -8,7 +8,7 @@
 #ifndef _F_ONE_MAX_H
 #define _F_ONE_MAX_H
 
-#include "IOHprofiler_problem.hpp"
+#include "IOHprofiler_problem.h"
 
 class OneMax : public IOHprofiler_problem<int> {
 public:
@@ -20,15 +20,11 @@ public:
     IOHprofiler_set_lowerbound(0);
     IOHprofiler_set_upperbound(1);
     IOHprofiler_set_best_variables(1);
-    Initilize_problem(dimension);
-  }
-  
-  ~OneMax() {};
-
-  void Initilize_problem(int dimension) {
     IOHprofiler_set_number_of_variables(dimension);
     IOHprofiler_set_optimal((double)dimension);
-  };
+  }
+  
+  ~OneMax() {}
 
   double internal_evaluate(const std::vector<int> &x) {
   
@@ -38,11 +34,11 @@ public:
       result += x[i];
     }
     return (double)result;
-  };
+  }
 
   static OneMax * createInstance(int instance_id = DEFAULT_INSTANCE, int dimension = DEFAULT_DIMENSION) {
     return new OneMax(instance_id, dimension);
-  };
+  }
 };
 
 #endif

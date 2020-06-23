@@ -9,8 +9,8 @@
 #ifndef _F_KATSUURA_H
 #define _F_KATSUURA_H
 
-#include "IOHprofiler_problem.hpp"
-#include "coco_transformation.h"
+#include "IOHprofiler_problem.h"
+#include "coco_transformation.hpp"
 
 class Katsuura : public IOHprofiler_problem<double> {
 public:
@@ -23,16 +23,12 @@ public:
     IOHprofiler_set_lowerbound(-5.0);
     IOHprofiler_set_upperbound(5.0);
     IOHprofiler_set_best_variables(0);
-    Initilize_problem(dimension);
+    IOHprofiler_set_number_of_variables(dimension);
     IOHprofiler_set_as_minimization();
   }
-  ~Katsuura() {};
 
-  void Initilize_problem(int dimension) {
-    IOHprofiler_set_number_of_variables(dimension);
-  };
-
-
+  ~Katsuura() {}
+  
   void prepare_problem() {
     std::vector<double> xopt;
     double fopt;
@@ -95,11 +91,11 @@ public:
     result[0] = 10. / ((double) n) / ((double) n) * (-1. + result[0]);
 
     return result[0];
-  };
+  }
 
   static Katsuura * createInstance(int instance_id = DEFAULT_INSTANCE, int dimension = DEFAULT_DIMENSION) {
     return new Katsuura(instance_id, dimension);
-  };
+  }
 };
 
 #endif

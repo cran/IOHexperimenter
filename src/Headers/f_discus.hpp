@@ -9,8 +9,8 @@
 #ifndef _F_DISCUS_H
 #define _F_DISCUS_H
 
-#include "IOHprofiler_problem.hpp"
-#include "coco_transformation.h"
+#include "IOHprofiler_problem.h"
+#include "coco_transformation.hpp"
 
 class Discus : public IOHprofiler_problem<double> {
 public:
@@ -23,15 +23,11 @@ public:
     IOHprofiler_set_lowerbound(-5.0);
     IOHprofiler_set_upperbound(5.0);
     IOHprofiler_set_best_variables(0.0);
-    Initilize_problem(dimension);
+    IOHprofiler_set_number_of_variables(dimension);
     IOHprofiler_set_as_minimization();
   }
-  ~Discus() {};
-
-  void Initilize_problem(int dimension) {
-    IOHprofiler_set_number_of_variables(dimension);
-  };
-
+  
+  ~Discus() {}
 
   void prepare_problem() {
     std::vector<double> xopt;
@@ -73,11 +69,11 @@ public:
     }
 
     return result[0];
-  };
+  }
   
   static Discus * createInstance(int instance_id = DEFAULT_INSTANCE, int dimension = DEFAULT_DIMENSION) {
     return new Discus(instance_id, dimension);
-  };
+  }
 };
 
 #endif

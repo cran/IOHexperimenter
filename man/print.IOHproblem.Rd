@@ -11,9 +11,6 @@
 
 \item{...}{Arguments for underlying function}
 }
-\value{
-The printed object
-}
 \description{
 S3 print function for IOHproblem
 }

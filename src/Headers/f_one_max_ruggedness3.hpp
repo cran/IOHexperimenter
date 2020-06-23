@@ -8,7 +8,7 @@
 #ifndef _F_ONE_MAX_RUGGEDNESSTHREE_H
 #define _F_ONE_MAX_RUGGEDNESSTHREE_H
 
-#include "IOHprofiler_problem.hpp"
+#include "IOHprofiler_problem.h"
 #include "wmodels.hpp"
 
 class OneMax_Ruggedness3 : public IOHprofiler_problem<int> {
@@ -22,14 +22,10 @@ public:
     IOHprofiler_set_lowerbound(0);
     IOHprofiler_set_upperbound(1);
     IOHprofiler_set_best_variables(1);
-    Initilize_problem(dimension);
+    IOHprofiler_set_number_of_variables(dimension);
   }
   
-  ~OneMax_Ruggedness3() {};
-
-  void Initilize_problem(int dimension) {
-    IOHprofiler_set_number_of_variables(dimension);
-  };
+  ~OneMax_Ruggedness3() {}
 
   std::vector<double> info;
   void prepare_problem() {
@@ -45,11 +41,11 @@ public:
     }
     result = this->info[(int)(result+0.5)];
     return (double)result;
-  };
+  }
   
   static OneMax_Ruggedness3 * createInstance(int instance_id = DEFAULT_INSTANCE, int dimension = DEFAULT_DIMENSION) {
     return new OneMax_Ruggedness3(instance_id, dimension);
-  };
+  }
 };
 
 #endif

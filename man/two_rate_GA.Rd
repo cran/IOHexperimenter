@@ -25,9 +25,6 @@ two_rate_GA(dimension, obj_func, target_hit = function() {     FALSE },
 
 \item{set_parameters}{Function to call to store the value of the registered parameters}
 }
-\value{
-A list containing the location (xopt) and value (fopt) of the optimal value found
-}
 \description{
 For easier use with the IOHexperimenter
 
@@ -39,6 +36,6 @@ probability 3/4, the other by 1/4.
 }
 \examples{
 \donttest{
-bechmark_algorithm(IOH_two_rate_GA)
+benchmark_algorithm(IOH_two_rate_GA)
 }
 }

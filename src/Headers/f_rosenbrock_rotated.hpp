@@ -9,8 +9,8 @@
 #ifndef _F_ROSENBROCK_ROTATED_HPP
 #define _F_ROSENBROCK_ROTATED_HPP
 
-#include "IOHprofiler_problem.hpp"
-#include "coco_transformation.h"
+#include "IOHprofiler_problem.h"
+#include "coco_transformation.hpp"
 
 class Rosenbrock_Rotated : public IOHprofiler_problem<double> {
 public:
@@ -23,21 +23,17 @@ public:
     IOHprofiler_set_lowerbound(-5.0);
     IOHprofiler_set_upperbound(5.0);
     IOHprofiler_set_best_variables(1);
-    Initilize_problem(dimension);
+    IOHprofiler_set_number_of_variables(dimension);
     IOHprofiler_set_as_minimization();
   }
-  ~Rosenbrock_Rotated() {};
 
-  void Initilize_problem(int dimension) {
-    IOHprofiler_set_number_of_variables(dimension);
-  };
+  ~Rosenbrock_Rotated() {}
 
   void prepare_problem() {
     double fopt, factor;
     std::vector<std::vector<double> > M;
     std::vector<double> b;
     /* compute xopt, fopt*/
-    
     
     int n = this->IOHprofiler_get_number_of_variables();
     const long rseed = (long) (9 + 10000 * this->IOHprofiler_get_instance_id());
@@ -58,7 +54,6 @@ public:
       }
       b[row] = 0.5;
     }
-
 
     // std::vector<double> tmp_best_variables(n,0.0);
     // for (int column = 0; column < n; ++column) { /* Wassim: manually set xopt = rot1^T ones(dimension)/(2*factor) */
@@ -92,11 +87,11 @@ public:
     result[0] = 100.0 * s1 + s2;
 
     return result[0];
-  };
+  }
 
   static Rosenbrock_Rotated * createInstance(int instance_id = DEFAULT_INSTANCE, int dimension = DEFAULT_DIMENSION) {
     return new Rosenbrock_Rotated(instance_id, dimension);
-  };
+  }
 };
 
 #endif

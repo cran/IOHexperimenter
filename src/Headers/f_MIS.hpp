@@ -8,7 +8,7 @@
 #ifndef _F_MIS_H
 #define _F_MIS_H
 
-#include "IOHprofiler_problem.hpp"
+#include "IOHprofiler_problem.h"
 
 class MIS : public IOHprofiler_problem<int> {
 public:
@@ -19,16 +19,11 @@ public:
     IOHprofiler_set_number_of_objectives(1);
     IOHprofiler_set_lowerbound(0);
     IOHprofiler_set_upperbound(1);
-    Initilize_problem(dimension);
+    IOHprofiler_set_number_of_variables(dimension);
   }
 
-  ~MIS() {};
-
-  void Initilize_problem(int dimension) {
-    IOHprofiler_set_number_of_variables(dimension);
-  };
+  ~MIS() {}
   
-
   int isEdge (int i, int j, size_t problem_size) {
     if (i!=problem_size/2 && j==i+1) {
       return 1;
@@ -54,7 +49,6 @@ double internal_evaluate(const std::vector<int> &x) {
     if (n%2!=0) {
         number_of_variables_even=(int)n-1;
     }
-
    
     for (index=0; index<number_of_variables_even; index++) {
       if (x[index]==1) {
@@ -72,11 +66,11 @@ double internal_evaluate(const std::vector<int> &x) {
     }
     result=num_of_ones - (number_of_variables_even*sum_edges_in_the_set);
     return (double)result;
-  };
+  }
 
   static MIS * createInstance(int instance_id = DEFAULT_INSTANCE, int dimension = DEFAULT_DIMENSION) {
     return new MIS(instance_id, dimension);
-  };
+  }
 };
 
 #endif

@@ -8,7 +8,7 @@
 #ifndef _F_NK_LANDSCAPES_H
 #define _F_NK_LANDSCAPES_H
 
-#include "IOHprofiler_problem.hpp"
+#include "IOHprofiler_problem.h"
 
 class NK_Landscapes : public IOHprofiler_random, public IOHprofiler_problem<int> {
 public:
@@ -19,10 +19,11 @@ public:
     IOHprofiler_set_number_of_objectives(1);
     IOHprofiler_set_lowerbound(0);
     IOHprofiler_set_upperbound(1);
-    Initilize_problem(dimension);
+    IOHprofiler_set_number_of_variables(dimension);
   }
   
   ~NK_Landscapes() {};
+  
   std::vector<std::vector<double>> F;
   std::vector<std::vector<int>> E;
   int k = 1;
@@ -67,11 +68,6 @@ public:
     }
   }
 
-  void Initilize_problem(int dimension) {
-    IOHprofiler_set_number_of_variables(dimension);
-    IOHprofiler_set_optimal((double)dimension);
-  };
-
   void prepare_problem() {
     set_n_k(IOHprofiler_get_number_of_variables(),k);
   }
@@ -91,11 +87,11 @@ public:
 
     result = result / (double)n;
     return -result;
-  };
+  }
 
   static NK_Landscapes * createInstance(int instance_id = DEFAULT_INSTANCE, int dimension = DEFAULT_DIMENSION) {
     return new NK_Landscapes(instance_id, dimension);
-  };
+  }
 };
 
 #endif

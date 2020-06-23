@@ -8,7 +8,7 @@
 #ifndef _F_CONCATENATED_TRAP_H
 #define _F_CONCATENATED_TRAP_H
 
-#include "IOHprofiler_problem.hpp"
+#include "IOHprofiler_problem.h"
 
 class Concatenated_Trap : public IOHprofiler_problem<int> {
 public:
@@ -21,15 +21,12 @@ public:
     IOHprofiler_set_lowerbound(0);
     IOHprofiler_set_upperbound(1);
     IOHprofiler_set_best_variables(1);
-    Initilize_problem(dimension);
+    IOHprofiler_set_number_of_variables(dimension);
+    IOHprofiler_set_optimal((double)dimension);
   }
   
   ~Concatenated_Trap() {};
 
-  void Initilize_problem(int dimension) {
-    IOHprofiler_set_number_of_variables(dimension);
-    IOHprofiler_set_optimal((double)dimension);
-  };
   int k = 5;
 
   double internal_evaluate(const std::vector<int> &x) {
@@ -63,11 +60,11 @@ public:
     }
 
     return result;
-  };
+  }
 
   static Concatenated_Trap * createInstance(int instance_id = DEFAULT_INSTANCE, int dimension = DEFAULT_DIMENSION) {
     return new Concatenated_Trap(instance_id, dimension);
-  };
+  }
 };
 
 #endif

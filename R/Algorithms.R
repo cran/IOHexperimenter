@@ -4,8 +4,7 @@
 #'
 #' @rdname random_search
 #' @param IOHproblem An IOHproblem object
-#' 
-#' @return A list containing the location (xopt) and value (fopt) of the optimal value found
+#'
 #' @export
 #' @examples 
 #' \donttest{
@@ -24,7 +23,7 @@ IOH_random_search <- function(IOHproblem, budget = NULL) {
 #' For easier use with the IOHexperimenter
 #'
 #' @param IOHproblem An IOHproblem object
-#' @return A list containing the location (xopt) and value (fopt) of the optimal value found
+#' 
 #' @rdname random_local_search
 #' @export
 #' @examples 
@@ -40,14 +39,14 @@ IOH_random_local_search <- function(IOHproblem, budget = NULL) {
 #' For easier use with the IOHexperimenter
 #'
 #' @param IOHproblem An IOHproblem object
-#' @return A list containing the location (xopt) and value (fopt) of the optimal value found
+#' 
 #' @rdname self_adaptive_GA
 #' @export
 #' @examples 
 #' \donttest{
 #' one_comma_two_EA <- function(IOHproblem) { IOH_self_adaptive_GA(IOHproblem, lambda_=2) }
 #'
-#' benchmark_algorithm(one_comma_two_EA, params.track = "Mutation rate",
+#' benchmark_algorithm(one_comma_two_EA, params.track = "Mutation_rate",
 #' algorithm.name = "one_comma_two_EA", data.dir = NULL,
 #' algorithm.info = "Using one_comma_two_EA with specific parameter" )
 #' }
@@ -62,12 +61,12 @@ IOH_self_adaptive_GA <- function(IOHproblem, lambda_ = 1, budget = NULL) {
 #' For easier use with the IOHexperimenter
 #'
 #' @param IOHproblem An IOHproblem object
-#' @return A list containing the location (xopt) and value (fopt) of the optimal value found
+#' 
 #' @rdname two_rate_GA
 #' @export
 #' @examples 
 #' \donttest{
-#' bechmark_algorithm(IOH_two_rate_GA)
+#' benchmark_algorithm(IOH_two_rate_GA)
 #' }
 IOH_two_rate_GA <- function(IOHproblem, lambda_ = 1, budget = NULL) {
   two_rate_GA(IOHproblem$dimension, IOHproblem$obj_func, budget = budget, 
@@ -114,7 +113,7 @@ random_search_PB <- function(dim, obj_func, target_hit = function(){ FALSE }, bu
 #' The function assumes minimization, achieved by inverting the obj_func when `maximize` is FALSE
 #' @export
 random_search <- function(dim, obj_func, target_hit = function(){ FALSE }, budget = NULL, 
-                          lbound = -1, ubound = 1, maximize = TRUE) {
+                          lbound = -1, ubound = 1, maximize = T) {
   if (is.null(budget)) budget <- 10 * dim
   if (maximize) { #Assume mimimization in the remainder of this function
     obj_func_transformed <- function(x) {return(-1*obj_func(x))}
@@ -211,7 +210,7 @@ self_adaptive_GA <- function(dimension, obj_func, lambda_ = 10, budget = NULL,
   if (is.null(budget)) budget <- 10 * dimension
 
   r <- 1.0 / dimension
-  if (is.function(set_parameters)) set_parameters(r)
+  if (is.function(set_parameters)) set_parameters('Mutation_rate', r)
 
   x <- sample(c(0, 1), dimension, TRUE)
   xopt <- x
@@ -227,7 +226,7 @@ self_adaptive_GA <- function(dimension, obj_func, lambda_ = 10, budget = NULL,
     idx <- matrix(runif(lambda_ * dimension), lambda_, dimension) < r_
     x_[idx] <- 1 - x_[idx]
 
-    if (is.function(set_parameters)) set_parameters(r)
+    if (is.function(set_parameters)) set_parameters('Mutation_rate', r)
     f <- obj_func(x_)
     budget <- budget - lambda_
     selected <- which(min(f) == f)[[1]]
@@ -266,7 +265,7 @@ two_rate_GA <- function(dimension, obj_func, target_hit = function() { FALSE }, 
   r <- 2.0
   fopt <- obj_func(parent)
   budget <- budget - 1
-  if (is.function(set_parameters)) set_parameters(r)
+  if (is.function(set_parameters)) set_parameters('Mutation_rate', r)
   
   while (budget > 0 && !target_hit()) {
     selected_r <- r;
@@ -308,7 +307,7 @@ two_rate_GA <- function(dimension, obj_func, target_hit = function() { FALSE }, 
 
     if (r < 2.0) r = 2.0
     if (r > dimension / 4.0) r = dimension / 4.0
-    if (is.function(set_parameters)) set_parameters(r)
+    if (is.function(set_parameters)) set_parameters('Mutation_rate', r)
     
   }
   list(xopt = best, fopt = fopt)

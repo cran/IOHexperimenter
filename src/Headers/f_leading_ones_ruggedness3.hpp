@@ -8,7 +8,7 @@
 #ifndef _F_LEADING_ONES_RUGGEDNESSTHREE_H
 #define _F_LEADING_ONES_RUGGEDNESSTHREE_H
 
-#include "IOHprofiler_problem.hpp"
+#include "IOHprofiler_problem.h"
 #include "wmodels.hpp"
 
 class LeadingOnes_Ruggedness3 : public IOHprofiler_problem<int> {
@@ -25,11 +25,11 @@ public:
     Initilize_problem(dimension);
   }
   
-  ~LeadingOnes_Ruggedness3() {};
+  ~LeadingOnes_Ruggedness3() {}
   
   void Initilize_problem(int dimension) {
     IOHprofiler_set_number_of_variables(dimension);
-  };
+  }
 
   std::vector<double> info;
   void prepare_problem() {
@@ -47,13 +47,13 @@ public:
         break;
       }
     }
-    result = this->info[(int)(result+0.5)];
+    result = this->info[(int)(result + 0.5)];
     return (double)result;
-  };
+  }
 
   static LeadingOnes_Ruggedness3 * createInstance(int instance_id = DEFAULT_INSTANCE, int dimension = DEFAULT_DIMENSION) {
     return new LeadingOnes_Ruggedness3(instance_id, dimension);
-  };
+  }
 };
 
 #endif
