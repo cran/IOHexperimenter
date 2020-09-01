@@ -1,4 +1,4 @@
-46f222772f19f4618cb8f1831874f7fa *DESCRIPTION
+1201c0ce32c9323f106570c1b7fa3716 *DESCRIPTION
 47ff01d572f99620284e727e823fa441 *LICENSE
 0509c86bc47331a40d7c0fbdbaaee4ab *NAMESPACE
 92b7ac4052760513f3d99ed40da0a0dd *R/Algorithms.R
@@ -96,7 +96,7 @@ d7cb41006d46a1c9a604096da6153be5 *src/Headers/f_step_ellipsoid.hpp
 ce81ad0ba5e1c4043e3cafae1154ae86 *src/Headers/f_w_model_one_max.hpp
 d7411fc1eca85c7b20acb001b9f1ff7f *src/Headers/f_weierstrass.hpp
 f05e23c30fa8a49ac259b5907756c63b *src/Headers/suite_bbob_legacy_code.hpp
-a3e8edbc319b3b86e1359cc7988327a4 *src/Headers/wmodels.hpp
+f6815396611c7d4069efb80fe80a2476 *src/Headers/wmodels.hpp
 2d87b1ebf99baac32eae5020f42791a6 *src/IOHprofiler_common.cpp
 804331b6690a142ea1946ce543c3ef57 *src/IOHprofiler_configuration.cpp
 d3d2cdc05c391eec80ea2ec9e56cd6ba *src/IOHprofiler_csv_logger.cpp
